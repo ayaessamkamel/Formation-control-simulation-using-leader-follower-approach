@@ -15,30 +15,25 @@ c13 = [-1,1.5];
 c23 = [-2,0];
 c32 = [2,0];
 
-%desired vectors of relative positions (c_mat = [sum of the desired vectors of positions for x1, y1, x2, y2, x3, y3, x4, y4])
+%desired vectors of relative positions (c_mat = [sum of the desired vectors of positions for x1, y1, x2, y2, x3, y3])
 c_mat = [0,0,c12(1,1) + c32(1,1),c12(1,2) + c32(1,2),c13(1,1) + c23(1,1), c13(1,2) + c23(1,2)]';
 
 %initialize the array for the state of agents
 %z = [z1x(0) z1x(k) ...
 %       z1y(0) z1y(k) ......
-%       .
-%       .
-%       z8y(0) z8y(k)]
 %size(z) = [numNodes*2, k]
 z = zeros(numNodes*2, iteration+1);
 
 %Initialize the array for the distance between each 'adjacent' agents
-% dis = [  0   dis12 dis13 dis14;
-%        dis21   0   dis23 dis24;
-%        dis31 dis32   0   dis34;
-%        dis41 dis42 dis43   0  ...];
+% dis = [  0   dis12 dis13 ;
+%        dis21   0   dis23 ;
+%        dis31 dis32   0    ...];
 dis = zeros(numNodes,numNodes,length(z));
 
 %Initialize the array for the RPF's derivative
-% d_v = [  0   dv_12 dv_13 dv_14;
-%        dv_21   0   dv_23 dv_24;
-%        dv_31 dv_32   0   dv_34;
-%        dv_41 dv_42 dv_43   0  ...];
+% d_v = [  0   dv_12 dv_13 ;
+%        dv_21   0   dv_23 ;
+%        dv_31 dv_32   0    ...];
 d_v =zeros(numNodes,numNodes,length(z));
 z(:,1)=z0; 
 for k =1:iteration+1
